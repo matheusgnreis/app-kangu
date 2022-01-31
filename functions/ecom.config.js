@@ -144,35 +144,26 @@ const app = {
   admin_settings: {
     /**
      * JSON schema based fields to be configured by merchant and saved to app `data` / `hidden_data`, such as:
-
-     webhook_uri: {
-       schema: {
-         type: 'string',
-         maxLength: 255,
-         format: 'uri',
-         title: 'Notifications URI',
-         description: 'Unique notifications URI available on your Custom App dashboard'
-       },
-       hide: true
-     },
-     token: {
-       schema: {
-         type: 'string',
-         maxLength: 50,
-         title: 'App token'
-       },
-       hide: true
-     },
-     opt_in: {
-       schema: {
-         type: 'boolean',
-         default: false,
-         title: 'Some config option'
-       },
-       hide: false
-     },
-
-     */
+    */
+     zip: {
+      schema: {
+        type: 'string',
+        maxLength: 9,
+        pattern: '^[0-9]{5}-?[0-9]{3}$',
+        title: 'CEP de origem',
+        description: 'Código postal do remetente para cálculo do frete'
+      },
+      hide: true
+    },
+    mandabem_token: {
+      schema: {
+        type: 'string',
+        maxLength: 32,
+        title: 'Kangu API Token',
+        description: 'API Token disponível em https://portal.kangu.com.br/meu-acesso'
+      },
+      hide: true
+    }
   }
 }
 
@@ -185,7 +176,7 @@ const procedures = []
 
 /**
  * Uncomment and edit code above to configure `triggers` and receive respective `webhooks`:
-
+*/
 const { baseUri } = require('./__env')
 
 procedures.push({
@@ -193,6 +184,7 @@ procedures.push({
 
   triggers: [
     // Receive notifications when new order is created:
+    /**
     {
       resource: 'orders',
       action: 'create',
@@ -204,10 +196,13 @@ procedures.push({
       resource: 'orders',
       field: 'financial_status',
     },
+    */
     {
       resource: 'orders',
       field: 'fulfillment_status',
-    },
+    }
+
+    /*
 
     // Receive notifications when products/variations stock quantity changes:
     {
@@ -233,6 +228,7 @@ procedures.push({
     },
 
     // Feel free to create custom combinations with any Store API resource, subresource, action and field.
+    */
   ],
 
   webhooks: [
@@ -246,7 +242,7 @@ procedures.push({
     }
   ]
 })
-
+/*
  * You may also edit `routes/ecom/webhook.js` to treat notifications properly.
  */
 
