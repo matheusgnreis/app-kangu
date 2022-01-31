@@ -39,7 +39,27 @@
     "products/price": [],
     "products/variations/price": []
   },
-  "admin_settings": {},
+  "admin_settings": {
+    "zip": {
+      "schema": {
+        "type": "string",
+        "maxLength": 9,
+        "pattern": "^[0-9]{5}-?[0-9]{3}$",
+        "title": "CEP de origem",
+        "description": "Código postal do remetente para cálculo do frete"
+      },
+      "hide": true
+    },
+    "mandabem_token": {
+      "schema": {
+        "type": "string",
+        "maxLength": 32,
+        "title": "Kangu API Token",
+        "description": "API Token disponível em https://portal.kangu.com.br/meu-acesso"
+      },
+      "hide": true
+    }
+  },
   "auth_callback_uri": "https://us-central1-app-kangu-teste.cloudfunctions.net/app/ecom/auth-callback",
   "version": "1.0.0"
 }
